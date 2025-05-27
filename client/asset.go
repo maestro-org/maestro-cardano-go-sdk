@@ -28,7 +28,7 @@ func (c *Client) AccountsHoldingAsset(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var accountsHoldingAsset models.AccountsHoldingAsset
 	err = json.NewDecoder(resp.Body).Decode(&accountsHoldingAsset)
 	if err != nil {
@@ -56,7 +56,7 @@ func (c *Client) AddressHoldingAsset(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var addressesHoldingAsset models.AddressesHoldingAsset
 	err = json.NewDecoder(resp.Body).Decode(&addressesHoldingAsset)
 	if err != nil {
@@ -77,7 +77,7 @@ func (c *Client) Asset(assetId string) (*models.AssetInformations, error) {
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var assetInformation models.AssetInformations
 	err = json.NewDecoder(resp.Body).Decode(&assetInformation)
 	if err != nil {
@@ -105,7 +105,7 @@ func (c *Client) AssetTransactions(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var assetTransactions models.AssetTransactions
 	err = json.NewDecoder(resp.Body).Decode(&assetTransactions)
 	if err != nil {
@@ -133,7 +133,7 @@ func (c *Client) AssetUpdates(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var assetUpdates models.AssetUpdates
 	err = json.NewDecoder(resp.Body).Decode(&assetUpdates)
 	if err != nil {
@@ -159,7 +159,7 @@ func (c *Client) AssetUtxos(assetId string, params *utils.Parameters) (*models.A
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var assetUtxos models.AssetUtxos
 	err = json.NewDecoder(resp.Body).Decode(&assetUtxos)
 	if err != nil {

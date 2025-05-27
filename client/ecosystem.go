@@ -20,7 +20,7 @@ func (c *Client) ResolveAdaHandle(handle string) (*models.BasicResponse, error) 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var adaHandle models.BasicResponse
 	err = json.NewDecoder(resp.Body).Decode(&adaHandle)
 	if err != nil {

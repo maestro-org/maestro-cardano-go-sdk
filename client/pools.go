@@ -25,7 +25,7 @@ func (c *Client) ListOfRegisteredPools(params *utils.Parameters) (*models.Regist
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var registeredPools models.RegisteredPools
 	err = json.NewDecoder(resp.Body).Decode(&registeredPools)
 	if err != nil {
@@ -53,7 +53,7 @@ func (c *Client) StakePoolMintedBlocks(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var poolMintedBlocks models.PoolMintedBlocks
 	err = json.NewDecoder(resp.Body).Decode(&poolMintedBlocks)
 	if err != nil {
@@ -81,7 +81,7 @@ func (c *Client) StakePoolDelegators(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var stakePoolDelegators models.StakePoolDelegators
 	err = json.NewDecoder(resp.Body).Decode(&stakePoolDelegators)
 	if err != nil {
@@ -109,7 +109,7 @@ func (c *Client) StakePoolHistory(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var stakePoolHistory models.StakePoolHistory
 	err = json.NewDecoder(resp.Body).Decode(&stakePoolHistory)
 	if err != nil {
@@ -130,7 +130,7 @@ func (c *Client) StakePoolInformation(poolId string) (*models.StakePoolInformati
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var stakePoolInformation models.StakePoolInformation
 	err = json.NewDecoder(resp.Body).Decode(&stakePoolInformation)
 	if err != nil {
@@ -151,7 +151,7 @@ func (c *Client) StakePoolMetadata(poolId string) (*models.StakePoolMetadata, er
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var stakePoolMetadata models.StakePoolMetadata
 	err = json.NewDecoder(resp.Body).Decode(&stakePoolMetadata)
 	if err != nil {
@@ -172,7 +172,7 @@ func (c *Client) StakePoolRelays(poolId string) (*models.StakePoolRelays, error)
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var stakePoolRelays models.StakePoolRelays
 	err = json.NewDecoder(resp.Body).Decode(&stakePoolRelays)
 	if err != nil {
@@ -194,7 +194,7 @@ func (c *Client) StakePoolUpdates(poolId string) (*models.StakePoolUpdates, erro
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var stakePoolUpdates models.StakePoolUpdates
 	err = json.NewDecoder(resp.Body).Decode(&stakePoolUpdates)
 	if err != nil {

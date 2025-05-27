@@ -77,7 +77,7 @@ func (c *Client) sendRequest(req *http.Request, responseBody *string) error {
 	if err != nil {
 		return fmt.Errorf("failed to read body: %s", err)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 
 	*responseBody = string(respBodyBytes)
 

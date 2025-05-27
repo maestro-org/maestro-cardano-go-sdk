@@ -21,7 +21,7 @@ func (c *Client) AddressByOutputReference(txHash string, index int) (*models.Bas
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var addressByOutputReference models.BasicResponse
 	err = json.NewDecoder(resp.Body).Decode(&addressByOutputReference)
 	if err != nil {
@@ -43,7 +43,7 @@ func (c *Client) SubmitTx(cbor string) (models.BasicResponse, error) {
 	if resp.StatusCode != http.StatusOK {
 		return models.BasicResponse{}, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var submitTx models.BasicResponse
 
 	err = json.NewDecoder(resp.Body).Decode(&submitTx)
@@ -65,7 +65,7 @@ func (c *Client) TransactionCbor(txHash string) (*models.BasicResponse, error) {
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var transactionCbor models.BasicResponse
 	err = json.NewDecoder(resp.Body).Decode(&transactionCbor)
 	if err != nil {
@@ -87,7 +87,7 @@ func (c *Client) TransactionDetails(txHash string) (*models.TransactionDetails, 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var transactionDetails models.TransactionDetails
 	err = json.NewDecoder(resp.Body).Decode(&transactionDetails)
 	if err != nil {
@@ -117,7 +117,7 @@ func (c *Client) TransactionOutputFromReference(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var transactionOutputFromReference models.TransactionOutputFromReference
 	err = json.NewDecoder(resp.Body).Decode(&transactionOutputFromReference)
 	if err != nil {
@@ -146,7 +146,7 @@ func (c *Client) TransactionOutputsFromReferences(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var transactionOutputsFromReferences models.TransactionOutputsFromReferences
 	err = json.NewDecoder(resp.Body).Decode(&transactionOutputsFromReferences)
 	if err != nil {
@@ -175,7 +175,7 @@ func (c *Client) EvaluateTx(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var redeemerEvals models.EvaluateTxResponse
 	err = json.NewDecoder(resp.Body).Decode(&redeemerEvals)
 	if err != nil {
