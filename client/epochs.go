@@ -20,7 +20,7 @@ func (c *Client) CurrentEpoch() (*models.EpochResp, error) {
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var currentEpoch models.EpochResp
 	err = json.NewDecoder(resp.Body).Decode(&currentEpoch)
 	if err != nil {
@@ -41,7 +41,7 @@ func (c *Client) SpecificEpoch(epochNo int) (*models.EpochResp, error) {
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var specificEpoch models.EpochResp
 	err = json.NewDecoder(resp.Body).Decode(&specificEpoch)
 	if err != nil {

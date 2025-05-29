@@ -28,7 +28,7 @@ func (c *Client) AccountsHoldingPolicy(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var response models.AccountsHoldingPolicy
 	err = json.NewDecoder(resp.Body).Decode(&response)
 	if err != nil {
@@ -56,7 +56,7 @@ func (c *Client) AddressesHoldingPolicy(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var response models.AddressesHoldingPolicy
 	err = json.NewDecoder(resp.Body).Decode(&response)
 	if err != nil {
@@ -84,7 +84,7 @@ func (c *Client) SpecificPolicyInformations(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var response models.PolicyInformation
 	err = json.NewDecoder(resp.Body).Decode(&response)
 	if err != nil {
@@ -112,7 +112,7 @@ func (c *Client) TransactionsMovingPolicy(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var response models.PolicyTransactions
 	err = json.NewDecoder(resp.Body).Decode(&response)
 	if err != nil {
@@ -140,7 +140,7 @@ func (c *Client) UtxosContainingPolicy(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var response models.UtxosContainingPolicy
 	err = json.NewDecoder(resp.Body).Decode(&response)
 	if err != nil {

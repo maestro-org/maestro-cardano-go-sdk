@@ -34,7 +34,7 @@ func (c *Client) LockAssets(lockBody LockBody) (*models.LockTransaction, error) 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var lockTransaction models.LockTransaction
 	err = json.NewDecoder(resp.Body).Decode(&lockTransaction)
 	if err != nil {
@@ -55,7 +55,7 @@ func (c *Client) StateOfVestingAssets(beneficiary string) (*[]models.VestingStat
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var vestingStates []models.VestingState
 	err = json.NewDecoder(resp.Body).Decode(&vestingStates)
 	if err != nil {
@@ -77,7 +77,7 @@ func (c *Client) CollectAssets(beneficiary string) (*models.CollectTransaction, 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var collectTransaction models.CollectTransaction
 	err = json.NewDecoder(resp.Body).Decode(&collectTransaction)
 	if err != nil {

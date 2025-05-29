@@ -20,7 +20,7 @@ func (c *Client) DatumFromHash(hash string) (*models.DatumFromHash, error) {
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var datum models.DatumFromHash
 	err = json.NewDecoder(resp.Body).Decode(&datum)
 	if err != nil {

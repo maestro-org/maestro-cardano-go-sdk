@@ -22,7 +22,7 @@ func (c *Client) TxManagerHistory() (*[]models.TxManagerState, error) {
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var txManagerStates []models.TxManagerState
 	err = json.NewDecoder(resp.Body).Decode(&txManagerStates)
 	if err != nil {
@@ -47,7 +47,7 @@ func (c *Client) TxManagerSubmit(txHex string) (string, error) {
 	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusAccepted {
 		return "", fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return "", err
@@ -72,7 +72,7 @@ func (c *Client) TxManagerSubmitTurbo(txHex string) (string, error) {
 	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusAccepted {
 		return "", fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return "", err
@@ -93,7 +93,7 @@ func (c *Client) TxManagerState(txHash string) (*models.TxManagerState, error) {
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var txManagerState models.TxManagerState
 	err = json.NewDecoder(resp.Body).Decode(&txManagerState)
 	if err != nil {

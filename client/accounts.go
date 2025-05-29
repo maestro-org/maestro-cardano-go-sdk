@@ -28,7 +28,7 @@ func (c *Client) AccountAddresses(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var accountAddresses models.AccountAddresses
 	err = json.NewDecoder(resp.Body).Decode(&accountAddresses)
 	if err != nil {
@@ -56,7 +56,7 @@ func (c *Client) AccountAssets(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var accountAssets models.AccountAssets
 	err = json.NewDecoder(resp.Body).Decode(&accountAssets)
 	if err != nil {
@@ -84,7 +84,7 @@ func (c *Client) StakeAccountHistory(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var stakeAccountHistory models.StakeAccountHistory
 	err = json.NewDecoder(resp.Body).Decode(&stakeAccountHistory)
 	if err != nil {
@@ -108,7 +108,7 @@ func (c *Client) StakeAccountInformation(
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var stakeAccountInformation models.StakeAccountInformation
 	err = json.NewDecoder(resp.Body).Decode(&stakeAccountInformation)
 	if err != nil {
@@ -136,7 +136,7 @@ func (c *Client) StakeAccountRewards(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var stakeAccountRewards models.StakeAccountRewards
 	err = json.NewDecoder(resp.Body).Decode(&stakeAccountRewards)
 	if err != nil {
@@ -164,7 +164,7 @@ func (c *Client) StakeAccountUpdates(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var stakeAccountUpdates models.StakeAccountUpdates
 	err = json.NewDecoder(resp.Body).Decode(&stakeAccountUpdates)
 	if err != nil {

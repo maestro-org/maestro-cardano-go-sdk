@@ -21,7 +21,7 @@ func (c *Client) DecodeAddress(address string) (*models.DecodedAddress, error) {
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var decodedAddress models.DecodedAddress
 	err = json.NewDecoder(resp.Body).Decode(&decodedAddress)
 	if err != nil {
@@ -42,7 +42,7 @@ func (c *Client) AddressTransactionCount(address string) (*models.AddressTransac
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var addressTransactionCount models.AddressTransactionCount
 	err = json.NewDecoder(resp.Body).Decode(&addressTransactionCount)
 	if err != nil {
@@ -70,7 +70,7 @@ func (c *Client) AddressTransactions(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var addressTransactions models.AddressTransactions
 	err = json.NewDecoder(resp.Body).Decode(&addressTransactions)
 	if err != nil {
@@ -98,7 +98,7 @@ func (c *Client) PaymentCredentialTransactions(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var addressTransactions models.AddressTransactions
 	err = json.NewDecoder(resp.Body).Decode(&addressTransactions)
 	if err != nil {
@@ -126,7 +126,7 @@ func (c *Client) UtxoReferencesAtAddress(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var utxoReferencesAtAddress models.UtxoReferencesAtAddress
 	err = json.NewDecoder(resp.Body).Decode(&utxoReferencesAtAddress)
 	if err != nil {
@@ -154,7 +154,7 @@ func (c *Client) UtxosAtAddress(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var utxosAtAddress models.UtxosAtAddress
 	err = json.NewDecoder(resp.Body).Decode(&utxosAtAddress)
 	if err != nil {
@@ -183,7 +183,7 @@ func (c *Client) UtxosAtAddresses(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var utxosAtAddress models.UtxosAtAddress
 	err = json.NewDecoder(resp.Body).Decode(&utxosAtAddress)
 	if err != nil {
@@ -211,7 +211,7 @@ func (c *Client) UtxosByPaymentCredential(
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	var utxosAtAddress models.UtxosAtAddress
 	err = json.NewDecoder(resp.Body).Decode(&utxosAtAddress)
 	if err != nil {
