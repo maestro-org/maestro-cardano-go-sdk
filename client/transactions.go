@@ -158,7 +158,7 @@ func (c *Client) TransactionOutputsFromReferences(
 
 func (c *Client) EvaluateTx(
 	txCbor string,
-	AdditionalUtxos ...string,
+	AdditionalUtxos ...models.AdditionalUtxo,
 ) (models.EvaluateTxResponse, error) {
 	url := "/transactions/evaluate"
 	body := models.EvaluateTx{
