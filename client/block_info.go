@@ -46,8 +46,12 @@ type BlockInfo struct {
 	LastUpdated utils.LastUpdated `json:"last_updated"`
 }
 
-func (c *Client) BlockInfo(blockHeight int64) (*BlockInfo, error) {
-	req, err := http.NewRequest("GET", fmt.Sprintf("%s/blocks/%d", c.BaseUrl, blockHeight), nil)
+func (c *Client) BlockInfo(hashOrHeight string) (*BlockInfo, error) {
+	return c.BlockInfoWithOptions(hashOrHeight, false)
+}
+
+func (c *Client) BlockInfoWithOptions(hashOrHeight string, amountsAsStrings bool) (*BlockInfo, error) {
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/blocks/%s", c.BaseUrl, hashOrHeight), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -56,6 +60,11 @@ func (c *Client) BlockInfo(blockHeight int64) (*BlockInfo, error) {
 	}
 
 	req.Header.Set("Content-Type", "application/json")
+	if amountsAsStrings {
+		req.Header.Set("amounts-as-strings", "true")
+	} else {
+		req.Header.Set("amounts-as-strings", "false")
+	}
 
 	var responseBody string
 	blockInfo := BlockInfo{}
