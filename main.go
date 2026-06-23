@@ -9,7 +9,7 @@ import (
 
 func main() {
 	maestroClient := client.NewClient("AMXzQsaXXuUPwfV4IWz8q3tMTmO6x40d", "mainnet")
-	blockInfo, err := maestroClient.BlockInfo(9005859)
+	blockInfo, err := maestroClient.BlockInfo("9005859")
 	if err != nil {
 		fmt.Printf("Failed to retrieve block info: %s", err)
 		os.Exit(1)

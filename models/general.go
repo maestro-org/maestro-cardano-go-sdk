@@ -67,9 +67,13 @@ type ProtocolVersion struct {
 	Minor int64 `json:"minor"`
 }
 
+// StringExUnits holds the script execution prices from the protocol
+// parameters, expressed as fraction strings (for example "721/10000000").
+// The Maestro API returns these under "memory" and "cpu"; the CPU/step
+// price is the "cpu" field (not "steps").
 type StringExUnits struct {
 	Memory string `json:"memory"`
-	Steps  string `json:"steps"`
+	Cpu    string `json:"cpu"`
 }
 
 type AdaAmount struct {
