@@ -81,27 +81,35 @@ type AdaAmount struct {
 }
 
 type ProtocolParams struct {
-	CollateralPercentage            int64           `json:"collateral_percentage"`
-	DesiredNumberOfStakePools       int64           `json:"desired_number_of_stake_pools"`
-	MaxBlockBodySize                BytesSize       `json:"max_block_body_size"`
-	MaxBlockHeaderSize              BytesSize       `json:"max_block_header_size"`
-	MaxCollateralInputs             int64           `json:"max_collateral_inputs"`
-	MaxExecutionUnitsPerBlock       ExUnits         `json:"max_execution_units_per_block"`
-	MaxExecutionUnitsPerTransaction ExUnits         `json:"max_execution_units_per_transaction"`
-	MaxTransactionSize              BytesSize       `json:"max_transaction_size"`
-	MaxValueSize                    BytesSize       `json:"max_value_size"`
-	MinFeeCoefficient               int64           `json:"min_fee_coefficient"`
-	MinFeeConstant                  AdaAmount       `json:"min_fee_constant"`
-	MinStakePoolCost                AdaAmount       `json:"min_stake_pool_cost"`
-	MinUtxoDepositCoefficient       int64           `json:"min_utxo_deposit_coefficient"`
-	MinUtxoDepositConstant          AdaAmount       `json:"min_utxo_deposit_constant"`
-	MonetaryExpansion               string          `json:"monetary_expansion"`
-	PlutusCostModels                any             `json:"plutus_cost_models"`
-	ProtocolVersion                 ProtocolVersion `json:"version"`
-	ScriptExecutionPrices           StringExUnits   `json:"script_execution_prices"`
-	StakeCredentialDeposit          AdaAmount       `json:"stake_credential_deposit"`
-	StakePoolDeposit                AdaAmount       `json:"stake_pool_deposit"`
-	StakePoolPledgeInfluence        string          `json:"stake_pool_pledge_influence"`
-	StakePoolRetirementEpochBound   int64           `json:"stake_pool_retirement_epoch_bound"`
-	TreasuryExpansion               string          `json:"treasury_expansion"`
+	CollateralPercentage            int64                  `json:"collateral_percentage"`
+	DesiredNumberOfStakePools       int64                  `json:"desired_number_of_stake_pools"`
+	MaxBlockBodySize                BytesSize              `json:"max_block_body_size"`
+	MaxBlockHeaderSize              BytesSize              `json:"max_block_header_size"`
+	MaxCollateralInputs             int64                  `json:"max_collateral_inputs"`
+	MaxExecutionUnitsPerBlock       ExUnits                `json:"max_execution_units_per_block"`
+	MaxExecutionUnitsPerTransaction ExUnits                `json:"max_execution_units_per_transaction"`
+	MaxReferenceScriptsSize         BytesSize              `json:"max_reference_scripts_size"`
+	MaxTransactionSize              BytesSize              `json:"max_transaction_size"`
+	MaxValueSize                    BytesSize              `json:"max_value_size"`
+	MinFeeCoefficient               int64                  `json:"min_fee_coefficient"`
+	MinFeeConstant                  AdaAmount              `json:"min_fee_constant"`
+	MinFeeReferenceScripts          MinFeeReferenceScripts `json:"min_fee_reference_scripts"`
+	MinStakePoolCost                AdaAmount              `json:"min_stake_pool_cost"`
+	MinUtxoDepositCoefficient       int64                  `json:"min_utxo_deposit_coefficient"`
+	MinUtxoDepositConstant          AdaAmount              `json:"min_utxo_deposit_constant"`
+	MonetaryExpansion               string                 `json:"monetary_expansion"`
+	PlutusCostModels                any                    `json:"plutus_cost_models"`
+	ProtocolVersion                 ProtocolVersion        `json:"version"`
+	ScriptExecutionPrices           StringExUnits          `json:"script_execution_prices"`
+	StakeCredentialDeposit          AdaAmount              `json:"stake_credential_deposit"`
+	StakePoolDeposit                AdaAmount              `json:"stake_pool_deposit"`
+	StakePoolPledgeInfluence        string                 `json:"stake_pool_pledge_influence"`
+	StakePoolRetirementEpochBound   int64                  `json:"stake_pool_retirement_epoch_bound"`
+	TreasuryExpansion               string                 `json:"treasury_expansion"`
+}
+
+type MinFeeReferenceScripts struct {
+	Base       float64 `json:"base"`
+	Range      int64   `json:"range"`
+	Multiplier float64 `json:"multiplier"`
 }
