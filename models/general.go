@@ -48,9 +48,13 @@ type EraTimeStamp struct {
 	Time  EraTime `json:"time"`
 }
 
+// ExUnits holds max execution units (memory + steps) from the protocol
+// parameters. The Maestro API returns the step budget under the key "cpu"
+// (not "steps"); tag it accordingly or Steps deserializes to 0 and breaks
+// downstream Plutus evaluation budgets.
 type ExUnits struct {
 	Memory int64 `json:"memory"`
-	Steps  int64 `json:"steps"`
+	Steps  int64 `json:"cpu"`
 }
 
 type LovelaceAmount struct {
