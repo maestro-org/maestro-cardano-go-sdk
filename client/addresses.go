@@ -19,7 +19,7 @@ func (c *Client) DecodeAddress(address string) (*models.DecodedAddress, error) {
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var decodedAddress models.DecodedAddress
@@ -40,7 +40,7 @@ func (c *Client) AddressTransactionCount(address string) (*models.AddressTransac
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var addressTransactionCount models.AddressTransactionCount
@@ -68,7 +68,7 @@ func (c *Client) AddressTransactions(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var addressTransactions models.AddressTransactions
@@ -96,7 +96,7 @@ func (c *Client) PaymentCredentialTransactions(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var addressTransactions models.AddressTransactions
@@ -124,7 +124,7 @@ func (c *Client) UtxoReferencesAtAddress(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var utxoReferencesAtAddress models.UtxoReferencesAtAddress
@@ -152,7 +152,7 @@ func (c *Client) UtxosAtAddress(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var utxosAtAddress models.UtxosAtAddress
@@ -181,7 +181,7 @@ func (c *Client) UtxosAtAddresses(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var utxosAtAddress models.UtxosAtAddress
@@ -209,7 +209,7 @@ func (c *Client) UtxosByPaymentCredential(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var utxosAtAddress models.UtxosAtAddress

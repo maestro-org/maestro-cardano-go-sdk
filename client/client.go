@@ -3,7 +3,6 @@ package client
 import (
 	"bytes"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -62,14 +61,21 @@ func (c *Client) sendRequest(req *http.Request, responseBody *string) error {
 		return fmt.Errorf("empty response")
 	}
 
-	// Try to unmarshall into errorResponse
+	// Read the body once and build a typed *APIError.
 	if resp.StatusCode != http.StatusOK {
-		var errRes errorResponse
-		if err = json.NewDecoder(resp.Body).Decode(&errRes); err == nil {
-			return errors.New(errRes.Message)
+		defer resp.Body.Close() //nolint:errcheck
+		bodyBytes, readErr := io.ReadAll(resp.Body)
+		if readErr != nil {
+			return &APIError{
+				StatusCode: resp.StatusCode,
+				Message:    fmt.Sprintf("failed to read error body: %v", readErr),
+			}
 		}
-
-		return fmt.Errorf("unknown error, status code: %d", resp.StatusCode)
+		var errRes errorResponse
+		if json.Unmarshal(bodyBytes, &errRes) == nil && errRes.Message != "" {
+			return newAPIError(resp.StatusCode, errRes.Message, nil)
+		}
+		return newAPIError(resp.StatusCode, "", bodyBytes)
 	}
 
 	respBodyBytes, err := io.ReadAll(resp.Body)
@@ -82,6 +88,24 @@ func (c *Client) sendRequest(req *http.Request, responseBody *string) error {
 	*responseBody = string(respBodyBytes)
 
 	return nil
+}
+
+// unexpectedError reads the response body and returns a typed *APIError
+// including the HTTP status code and the server's error message or raw body.
+func unexpectedError(resp *http.Response) error {
+	defer resp.Body.Close() //nolint:errcheck
+	bodyBytes, readErr := io.ReadAll(resp.Body)
+	if readErr != nil {
+		return &APIError{
+			StatusCode: resp.StatusCode,
+			Message:    fmt.Sprintf("failed to read error body: %v", readErr),
+		}
+	}
+	var errRes errorResponse
+	if json.Unmarshal(bodyBytes, &errRes) == nil && errRes.Message != "" {
+		return newAPIError(resp.StatusCode, errRes.Message, nil)
+	}
+	return newAPIError(resp.StatusCode, "", bodyBytes)
 }
 
 func (c *Client) get(url string) (*http.Response, error) {

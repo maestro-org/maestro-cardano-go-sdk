@@ -32,7 +32,7 @@ func (c *Client) LockAssets(lockBody LockBody) (*models.LockTransaction, error) 
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var lockTransaction models.LockTransaction
@@ -53,7 +53,7 @@ func (c *Client) StateOfVestingAssets(beneficiary string) (*[]models.VestingStat
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var vestingStates []models.VestingState
@@ -75,7 +75,7 @@ func (c *Client) CollectAssets(beneficiary string) (*models.CollectTransaction, 
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var collectTransaction models.CollectTransaction

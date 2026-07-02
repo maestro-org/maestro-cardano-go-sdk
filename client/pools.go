@@ -23,7 +23,7 @@ func (c *Client) ListOfRegisteredPools(params *utils.Parameters) (*models.Regist
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var registeredPools models.RegisteredPools
@@ -51,7 +51,7 @@ func (c *Client) StakePoolMintedBlocks(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var poolMintedBlocks models.PoolMintedBlocks
@@ -79,7 +79,7 @@ func (c *Client) StakePoolDelegators(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var stakePoolDelegators models.StakePoolDelegators
@@ -107,7 +107,7 @@ func (c *Client) StakePoolHistory(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var stakePoolHistory models.StakePoolHistory
@@ -128,7 +128,7 @@ func (c *Client) StakePoolInformation(poolId string) (*models.StakePoolInformati
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var stakePoolInformation models.StakePoolInformation
@@ -149,7 +149,7 @@ func (c *Client) StakePoolMetadata(poolId string) (*models.StakePoolMetadata, er
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var stakePoolMetadata models.StakePoolMetadata
@@ -170,7 +170,7 @@ func (c *Client) StakePoolRelays(poolId string) (*models.StakePoolRelays, error)
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var stakePoolRelays models.StakePoolRelays
@@ -192,7 +192,7 @@ func (c *Client) StakePoolUpdates(poolId string) (*models.StakePoolUpdates, erro
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var stakePoolUpdates models.StakePoolUpdates

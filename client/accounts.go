@@ -26,7 +26,7 @@ func (c *Client) AccountAddresses(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var accountAddresses models.AccountAddresses
@@ -54,7 +54,7 @@ func (c *Client) AccountAssets(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var accountAssets models.AccountAssets
@@ -82,7 +82,7 @@ func (c *Client) StakeAccountHistory(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var stakeAccountHistory models.StakeAccountHistory
@@ -105,7 +105,7 @@ func (c *Client) StakeAccountInformation(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 
 	defer resp.Body.Close() //nolint:errcheck
@@ -134,7 +134,7 @@ func (c *Client) StakeAccountRewards(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var stakeAccountRewards models.StakeAccountRewards
@@ -162,7 +162,7 @@ func (c *Client) StakeAccountUpdates(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var stakeAccountUpdates models.StakeAccountUpdates

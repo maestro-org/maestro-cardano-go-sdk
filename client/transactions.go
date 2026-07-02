@@ -19,7 +19,7 @@ func (c *Client) AddressByOutputReference(txHash string, index int) (*models.Bas
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var addressByOutputReference models.BasicResponse
@@ -41,7 +41,7 @@ func (c *Client) SubmitTx(cbor string) (models.BasicResponse, error) {
 		return models.BasicResponse{}, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return models.BasicResponse{}, fmt.Errorf("unexpected error: %d", resp.Body)
+		return models.BasicResponse{}, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var submitTx models.BasicResponse
@@ -63,7 +63,7 @@ func (c *Client) TransactionCbor(txHash string) (*models.BasicResponse, error) {
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var transactionCbor models.BasicResponse
@@ -85,7 +85,7 @@ func (c *Client) TransactionDetails(txHash string) (*models.TransactionDetails, 
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var transactionDetails models.TransactionDetails
@@ -115,7 +115,7 @@ func (c *Client) TransactionOutputFromReference(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var transactionOutputFromReference models.TransactionOutputFromReference
@@ -144,7 +144,7 @@ func (c *Client) TransactionOutputsFromReferences(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var transactionOutputsFromReferences models.TransactionOutputsFromReferences
@@ -158,7 +158,7 @@ func (c *Client) TransactionOutputsFromReferences(
 
 func (c *Client) EvaluateTx(
 	txCbor string,
-	AdditionalUtxos ...string,
+	AdditionalUtxos ...models.AdditionalUtxo,
 ) (models.EvaluateTxResponse, error) {
 	url := "/transactions/evaluate"
 	body := models.EvaluateTx{
@@ -173,7 +173,7 @@ func (c *Client) EvaluateTx(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var redeemerEvals models.EvaluateTxResponse

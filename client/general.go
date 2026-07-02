@@ -18,7 +18,7 @@ func (c *Client) ChainTip() (*models.ChainTip, error) {
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var chainTip models.ChainTip
@@ -39,7 +39,7 @@ func (c *Client) EraSummaries() (*models.EraSummaries, error) {
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var eraSummaries models.EraSummaries
@@ -60,7 +60,7 @@ func (c *Client) ProtocolParameters() (*models.ProtocolParameters, error) {
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var protocolParameters models.ProtocolParameters
@@ -81,7 +81,7 @@ func (c *Client) BlockChainStartTime() (models.BasicResponse, error) {
 		return models.BasicResponse{}, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return models.BasicResponse{}, fmt.Errorf("unexpected error: %d", resp.Body)
+		return models.BasicResponse{}, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var blockchainStartTime models.BasicResponse

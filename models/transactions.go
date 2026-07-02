@@ -87,8 +87,8 @@ type TransactionOutputsFromReferences struct {
 }
 
 type EvaluateTx struct {
-	Cbor            string   `json:"cbor"`
-	AdditionalUtxos []string `json:"additional_utxos"`
+	Cbor            string           `json:"cbor"`
+	AdditionalUtxos []AdditionalUtxo `json:"additional_utxos"`
 }
 
 type ExecutionUnits struct {
@@ -103,3 +103,9 @@ type RedeemerEvaluation struct {
 }
 
 type EvaluateTxResponse []RedeemerEvaluation
+
+type AdditionalUtxo struct {
+	TxHash    string `json:"tx_hash"`
+	Index     int    `json:"index"`
+	TxoutCbor string `json:"txout_cbor"`
+}

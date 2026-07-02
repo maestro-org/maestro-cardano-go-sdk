@@ -21,6 +21,10 @@ func (p *Parameters) Format() string {
 	return "?" + strings.Join(p.params, "&&")
 }
 
+func (p *Parameters) Asset(asset string) {
+	p.params = append(p.params, "asset="+asset)
+}
+
 func (p *Parameters) Count(amount int) {
 	p.params = append(p.params, "count="+fmt.Sprint(amount))
 }

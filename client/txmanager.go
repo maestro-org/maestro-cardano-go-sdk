@@ -20,7 +20,7 @@ func (c *Client) TxManagerHistory() (*[]models.TxManagerState, error) {
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var txManagerStates []models.TxManagerState
@@ -45,7 +45,7 @@ func (c *Client) TxManagerSubmit(txHex string) (string, error) {
 		return "", fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusAccepted {
-		return "", fmt.Errorf("unexpected error: %d", resp.Body)
+		return "", unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	bodyBytes, err := io.ReadAll(resp.Body)
@@ -70,7 +70,7 @@ func (c *Client) TxManagerSubmitTurbo(txHex string) (string, error) {
 		return "", fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusAccepted {
-		return "", fmt.Errorf("unexpected error: %d", resp.Body)
+		return "", unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	bodyBytes, err := io.ReadAll(resp.Body)
@@ -91,7 +91,7 @@ func (c *Client) TxManagerState(txHash string) (*models.TxManagerState, error) {
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var txManagerState models.TxManagerState

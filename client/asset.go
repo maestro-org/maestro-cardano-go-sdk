@@ -26,7 +26,7 @@ func (c *Client) AccountsHoldingAsset(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var accountsHoldingAsset models.AccountsHoldingAsset
@@ -54,7 +54,7 @@ func (c *Client) AddressHoldingAsset(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var addressesHoldingAsset models.AddressesHoldingAsset
@@ -75,7 +75,7 @@ func (c *Client) Asset(assetId string) (*models.AssetInformations, error) {
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var assetInformation models.AssetInformations
@@ -103,7 +103,7 @@ func (c *Client) AssetTransactions(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var assetTransactions models.AssetTransactions
@@ -131,7 +131,7 @@ func (c *Client) AssetUpdates(
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var assetUpdates models.AssetUpdates
@@ -157,7 +157,7 @@ func (c *Client) AssetUtxos(assetId string, params *utils.Parameters) (*models.A
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var assetUtxos models.AssetUtxos

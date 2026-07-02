@@ -18,7 +18,7 @@ func (c *Client) CurrentEpoch() (*models.EpochResp, error) {
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var currentEpoch models.EpochResp
@@ -39,7 +39,7 @@ func (c *Client) SpecificEpoch(epochNo int) (*models.EpochResp, error) {
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var specificEpoch models.EpochResp

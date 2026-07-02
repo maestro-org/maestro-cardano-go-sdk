@@ -18,7 +18,7 @@ func (c *Client) ScriptByHash(hash string) (*models.ScriptByHash, error) {
 		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+		return nil, unexpectedError(resp)
 	}
 	defer resp.Body.Close() //nolint:errcheck
 	var scriptByHash models.ScriptByHash
